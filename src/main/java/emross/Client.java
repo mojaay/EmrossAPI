@@ -10,13 +10,13 @@ import emross.json.bean.UserInfo;
 
 public class Client {
 
+	private Action action = new Action(HttpEngine.getInstance());
 	private ServerInfo serverInfo;
 	private LoginInfo loginInfo;
 
 	public Client(final String user, final String password)
 			throws ServerCodeException {
 
-		Action action = new Action(HttpEngine.getInstance());
 		serverInfo = action.getServerInfo(Path.MASTER_HOST, user);
 		loginInfo = action.getKey(serverInfo.getServer(), serverInfo.getUser(),
 				password);

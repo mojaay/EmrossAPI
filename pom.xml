@@ -52,7 +52,7 @@
 	</build>
 	<scm>
 		<url>https://github.com/mojaay/EmrossAPI</url>
-		<connection>git://github.com/mojaay/EmrossAPI.git</connection>
+		<connection>git@github.com:mojaay/EmrossAPI.git</connection>
 		<developerConnection>git@github.com:mojaay/EmrossAPI.git</developerConnection>
 		<tag>master</tag>
 	</scm>
