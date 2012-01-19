@@ -1,28 +1,33 @@
 package emross;
 
+import java.util.List;
+
 import emross.action.Action;
+import emross.action.ActionImp;
 import emross.action.Path;
-import emross.http.HttpEngine;
 import emross.http.ServerCodeException;
-import emross.json.bean.LoginInfo;
 import emross.json.bean.ServerInfo;
 import emross.json.bean.UserInfo;
 
 public class Client {
 
-	private Action action = new Action(HttpEngine.getInstance());
-	private ServerInfo serverInfo;
-	private LoginInfo loginInfo;
+	private Action action = new ActionImp();
+	private final String key;
+	private final String server;
+
+	private List<City> city;
 
 	public Client(final String user, final String password)
 			throws ServerCodeException {
 
-		serverInfo = action.getServerInfo(Path.MASTER_HOST, user);
-		loginInfo = action.getKey(serverInfo.getServer(), serverInfo.getUser(),
-				password);
+		ServerInfo serverInfo = action.queryServerInfo(Path.MASTER_HOST, user);
 
-		UserInfo userInfo = action.getInfo(serverInfo.getServer(),
-				loginInfo.getKey());
+		server = serverInfo.getServer();
+
+		key = action.login(server, serverInfo.getUser(), password).getKey();
+
+		UserInfo userInfo = action.getUserInfo(server, key);
 		// serverInfo.get
 	}
+
 }
